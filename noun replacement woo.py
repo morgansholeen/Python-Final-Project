@@ -5,9 +5,12 @@ translator = Translator()
 
 while(1):
     from nltk.tokenize import word_tokenize
-    sentence = input("Welcome to SpInPy! Please type a sentence in English: ")
+    sentence = input("Welcome to SpInPy! Enter '*' to exit.\nPlease type a sentence in English: ")
+    if sentence == '*':
+        break
     words = word_tokenize(sentence)
-    del words[-1]
+    if words[-1] == '.':
+        del words[-1]
     tagged_words = nltk.pos_tag(words)
     print(tagged_words)
 
