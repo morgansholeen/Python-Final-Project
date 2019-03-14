@@ -50,3 +50,6 @@ while(1):
        print(result)
        engine.say(result)
        engine.runAndWait()
+
+   if imode==2:       
+       dict1.clear()
