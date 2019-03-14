@@ -39,7 +39,7 @@ while(1):
        if(ilang == 'f'):
            alang = 'fr'
        if(ilang == 'g'):
-           alang = 'ge'
+           alang = 'de'
        if(ilang == 's'):
            alang = 'es'
        destlang=alang
