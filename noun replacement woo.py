@@ -18,20 +18,15 @@ dict1 = []
 result = ''
 destlang= 'es'
 
-#tts function for mode (1)
-#called based on user input
-def speak(result):
-    engine.say(result)
-    engine.runAndWait()
-
 #codeswitch function for mode (1)
 def codeswitch():
-    while(1): 
+    flag = 1
+    while(flag): 
         sentence = input("Type a sentence in English: ")
         if sentence == '*':
             break
         words = word_tokenize(sentence)
-        if (words[-1] == '.'):
+        if words[-1] == '.':
             del words[-1]
         tagged_words = nltk.pos_tag(words)
         for word in tagged_words:
@@ -42,49 +37,62 @@ def codeswitch():
         s = ' '
         cs_sentence = s.join(words) 
         result = cs_sentence + '.'
-        listen = input(f'{result}\nEnter (@) to listen, (n) to enter a new sentence: ')
-        if (listen == 'n'):
-            codeswitch()
-        elif (listen == '@'):
-            speak(result)
-            codeswitch()
-        return; 
+        while(1):
+            listen = input(f'{result}\nEnter (@) to listen, (n) to enter a new sentence, (*) to go back to main menu: ')
+            if (listen == '@'):
+                engine.say(result)
+                engine.runAndWait()
+                break
+            elif (listen == 'n'):
+                break
+            elif (listen == '*'):
+                flag = 0
+                break
+            else: 
+                print("\nNot a valid input. ")
+    return;
 
 #outer loop - main menu and exit
 while(1):
    mode = input("Welcome to SpInPy!\n Main menu-- (1) code switch    (2) dictionary   (3) change language   (*) exit\n Mode select: ") 
    imode = mode
    
-   if (imode == '*'):
+   if imode == '*':
        print('¡Adios¡ Goodbye!')
        break
    
-   if (imode == '1'):
+   elif imode == '1':
      print('\nCode switch mode. Enter (*) to go back to the main menu.')
      codeswitch()
      
 #   if (imode== '2'):
 #        result=dict1
 
-   if (imode== '3'):
-       flag = 1
+   elif imode == '3':
+       langPrompt = 1
        alang = ''
-       while(flag):
+       while(langPrompt):
            lang = input("To return to the main menu, enter (*)\nEnter (f) for French, (g) for German or (s) for Spanish (default): ")
            if (lang == '*'):
-               flag = 0;
+               langPrompt = 0;
            elif (lang == 'f'):
                alang = 'fr'
-               flag = 0
+               langPrompt = 0
            elif (lang == 'g'):
                alang = 'de'
-               flag = 0
+               langPrompt = 0
            elif(lang == 's'):
                alang = 'es'   
-               flag = 0
+               langPrompt = 0
            else: 
                print("\nNot a valid input. ")
        destlang = alang
+       
+   else:
+       print("\nNot a valid input. ")
+           
+#   if imode==2:       
+#       dict1.clear()
        
    else:
        print("\nNot a valid input. ")
