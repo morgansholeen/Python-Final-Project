@@ -1,3 +1,8 @@
+"""
+Created on Tue Mar 12 21:50:53 2019
+
+@author: lindiatjuatja
+"""
 #modules to be used
 import nltk
 nltk.download('punkt')
@@ -26,7 +31,8 @@ def codeswitch():
         if sentence == '*':
             break
         words = word_tokenize(sentence)
-        del words[-1]
+        if (words[-1] == '.'):
+            del words[-1]
         tagged_words = nltk.pos_tag(words)
         for word in tagged_words:
             if word[1] == 'NN' or word[1] == 'NNS':
@@ -79,7 +85,10 @@ while(1):
            else: 
                print("\nNot a valid input. ")
        destlang = alang
+       
+   else:
+       print("\nNot a valid input. ")
            
 #   if imode==2:       
-#   dict1.clear()
+#       dict1.clear()
         
